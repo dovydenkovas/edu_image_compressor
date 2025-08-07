@@ -1,0 +1,14 @@
+#!/bin/bash -e
+
+mkdir -p test
+cd test
+cp ../build/compressor .
+cp ../imgs/image-3.bmp image.bmp
+
+# echo compression
+# time ./compressor image.bmp -s2500 -fo res.rle > /dev/null
+# echo decompression
+# time ./compressor res.rle -s2500 -fdo res.bmp
+# diff image.bmp res.bmp
+# echo profile
+valgrind --tool=callgrind  ./compressor image.bmp -s50 -fo res.rle > /dev/null
